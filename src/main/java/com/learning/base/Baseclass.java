@@ -1,6 +1,7 @@
 package com.learning.base;
 
 import configuration.ReadConfigFile;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,15 +23,17 @@ public class Baseclass {
 
     public static WebDriver createWebDriver() {
         String browserName = "chrome";
-
         switch(browserName) {
             case "firefox":
-                System.setProperty("webdriver.gecko.driver",System.getProperty("user.dir")+"/src/main/resources/lib/geckodriver");
+                WebDriverManager.firefoxdriver().setup();
+//                System.setProperty("webdriver.gecko.driver",System.getProperty("user.dir")+"/src/main/resources/lib/geckodriver");
                 driver = new FirefoxDriver();
                 break;
             case "chrome":
-                System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"/src/main/resources/lib/chromedriver");
-                driver = new ChromeDriver();break;
+                WebDriverManager.chromedriver().setup();
+//                System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"/src/main/resources/lib/chromedriver");
+                driver = new ChromeDriver();
+                break;
 
         }
         return driver;
